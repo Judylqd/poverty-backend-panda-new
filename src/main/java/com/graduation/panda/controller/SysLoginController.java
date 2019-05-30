@@ -125,7 +125,7 @@ public class SysLoginController {
      * 登录接口
      */
     @PostMapping(value = "/sys/login")
-    public HttpResult login(@RequestBody SysUser sysUser,HttpServletRequest request) throws IOException {
+    public HttpResult login(@RequestBody SysUser sysUser,HttpServletRequest request,HttpServletResponse response) throws IOException {
         String adminName = sysUser.getAdminName();
         String userPassword = sysUser.getUserPassword();
         String captcha = sysUser.getCaptcha();
@@ -158,6 +158,7 @@ public class SysLoginController {
 
         // 生成token，并保存到数据库
         SysUserToken data = sysUserTokenService.createToken(user.getUserId());
+        CookieUtils.setCookie(request,response,"token",data.getToken());
         return HttpResult.ok(data);
     }
 

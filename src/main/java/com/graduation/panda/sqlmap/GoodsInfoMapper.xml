@@ -103,7 +103,7 @@
                 keyword = #{keyword,jdbcType=VARCHAR},
             </if>
             <if test="stock != null">
-                stock = #{stock,jdbcType=VARCHAR},
+                stock = #{stock},
             </if>
             <if test="image != null">
                 image = #{image,jdbcType=VARCHAR},

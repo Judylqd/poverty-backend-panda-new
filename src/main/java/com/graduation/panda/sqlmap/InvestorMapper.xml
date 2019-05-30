@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.panda.dao.InvestorMapper">
+    <resultMap id="BaseResultMap" type="com.graduation.panda.model.Investor">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="investor_name" jdbcType="VARCHAR" property="investorName" />
+        <result column="investor_email" jdbcType="VARCHAR" property="investorEmail" />
+        <result column="investor_phone" jdbcType="VARCHAR" property="investorPhone" />
+        <result column="investor_aim" jdbcType="VARCHAR" property="investorAim" />
+        <result column="investor_money" jdbcType="VARCHAR" property="investorMoney" />
+    </resultMap>
+
+
+    <insert id="insertInvestor" parameterType="com.graduation.panda.model.Investor" >
+        insert into investor(id, investor_name, investor_email, investor_phone,
+        investor_aim, investor_money)
+        VALUES (#{id}, #{investorName}, #{investorEmail}, #{investorPhone}, #{investorAim},#{investorMoney})
+    </insert>
+
+    <select id="findAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from investor
+    </select>
+
+    <select id="findInvestorLimit" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select *
+        from investor limit #{pageNum},10
+    </select>
+
+    <select id="selectCount"  resultType="java.lang.Integer">
+        select count(1)
+        from investor
+    </select>
+</mapper>

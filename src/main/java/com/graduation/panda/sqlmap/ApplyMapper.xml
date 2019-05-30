@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.graduation.panda.dao.ApplyMapper">
+    <resultMap id="BaseResultMap" type="com.graduation.panda.model.Apply">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="apply_name" jdbcType="VARCHAR" property="applyName" />
+        <result column="apply_email" jdbcType="VARCHAR" property="applyEmail" />
+        <result column="apply_phone" jdbcType="VARCHAR" property="applyPhone" />
+        <result column="apply_kind" jdbcType="VARCHAR" property="applyKind" />
+        <result column="apply_goodsname" jdbcType="VARCHAR" property="applyGoodsname" />
+    </resultMap>
+
+
+    <insert id="insertApply" parameterType="com.graduation.panda.model.Apply" >
+        insert into apply(id, apply_name, apply_email, apply_phone,
+        apply_kind, apply_goodsname)
+        VALUES (#{id}, #{applyName}, #{applyEmail}, #{applyPhone}, #{applyKind},#{applyGoodsname})
+    </insert>
+
+    <select id="findAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select *
+        from apply
+    </select>
+
+
+    <select id="findApplyLimit" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select *
+        from apply limit #{pageNum},10
+    </select>
+
+    <select id="selectCount"  resultType="java.lang.Integer">
+        select count(1)
+        from apply
+    </select>
+</mapper>

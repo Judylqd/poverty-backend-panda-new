@@ -158,6 +158,7 @@ public class SysLoginController {
 
         // 生成token，并保存到数据库
         SysUserToken data = sysUserTokenService.createToken(user.getUserId());
+        request.setAttribute("userId",user.getUserId());
         CookieUtils.setCookie(request,response,"token",data.getToken());
         return HttpResult.ok(data);
     }

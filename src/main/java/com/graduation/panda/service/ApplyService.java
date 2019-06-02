@@ -10,4 +10,6 @@ public interface ApplyService {
     List<Apply> findApplyLimit(int pageNum);
 
     int selectCount();
+    void deleteByApplyId(int id);
+
 }

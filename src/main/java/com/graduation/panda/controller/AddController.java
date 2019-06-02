@@ -60,4 +60,20 @@ public class AddController {
         int totalSize = investorService.selectCount();
         return HttpResult.ok(totalSize,investors);
     }
+
+    @PostMapping("/deleteByApplyId")
+    @ResponseBody
+    public HttpResult deleteByApplyId(@RequestBody HashMap map){
+        int id = Integer.parseInt(map.get("id").toString());
+        applyService.deleteByApplyId(id);
+        return HttpResult.ok("删除成功");
+    }
+
+    @PostMapping("/deleteByInvestorId")
+    @ResponseBody
+    public HttpResult deleteByInvestorId(@RequestBody HashMap map){
+        int id = Integer.parseInt(map.get("id").toString());
+        investorService.deleteByInvestorId(id);
+        return HttpResult.ok("删除成功");
+    }
 }

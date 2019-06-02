@@ -10,6 +10,7 @@ import com.graduation.panda.utils.http.HttpResult;
 
 import io.swagger.models.auth.In;
 import org.apache.catalina.User;
+import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,18 +86,18 @@ public class OrderController {
     @PostMapping("/addOrderType")
     @ResponseBody
     public HttpResult addOrderType(HttpServletRequest request, @RequestBody HashMap map){
-        int price = Integer.parseInt(map.get("shipType").toString());
-        String orderType = "";
-        if (price == 50){
-            orderType = "海运";
-        }else {
-            orderType = "空运";
-        }
+//        int price = Integer.parseInt(map.get("shipType").toString());
+//        String orderType = "";
+//        if (price == 50){
+//            orderType = "海运";
+//        }else {
+//            orderType = "空运";
+//        }
         HttpSession session = request.getSession();
         String orderId = (String)session.getAttribute("orderId");
         OrderInfo orderInfo = orderService.findByOrderId(orderId);
-        orderInfo.setOrderType(orderType);
-        orderInfo.setTotalPrice(orderInfo.getTotalPrice() + price);
+//        orderInfo.setOrderType(orderType);
+//        orderInfo.setTotalPrice(orderInfo.getTotalPrice() + price);
         orderService.updateByOrderId(orderInfo);
         return HttpResult.ok();
     }
@@ -148,10 +149,11 @@ public class OrderController {
      */
     @PostMapping("/getAddressList")
     @ResponseBody
-    public HttpResult getAddressList(HttpServletRequest request){
+    public HttpResult getAddressList(HttpServletRequest request, @RequestBody HashMap map){
         //查询用户的收货地址
-        HttpSession session = request.getSession();
-        String userId = (String)session.getAttribute("userId");
+//        HttpSession session = request.getSession();
+//        String userId = (String)session.getAttribute("userId");
+        String userId = map.get("userId").toString();
         List<UserAddress> user= userAddressService.findByUserId(userId);
         return HttpResult.ok(user);
     }
@@ -164,10 +166,12 @@ public class OrderController {
      */
     @PostMapping("/createOrderPay")
     @ResponseBody
-    public HttpResult createOrderPay(HttpServletRequest request) throws AlipayApiException {
-        HttpSession session = request.getSession();
-        String userId = (String)session.getAttribute("userId");
-        String orderId = (String)session.getAttribute("orderId");
+    public HttpResult createOrderPay(HttpServletRequest request,@RequestBody HashMap map) throws AlipayApiException {
+//        HttpSession session = request.getSession();
+//        String userId = (String)session.getAttribute("userId");
+//        String orderId = (String)session.getAttribute("orderId");
+        String userId = map.get("userId").toString();
+        String orderId = map.get("orderId").toString();
         OrderInfo orderInfo = orderService.findByOrderId(orderId);
         List<OrderGoods> orderGoods = orderService.findGoodsByOrderId(orderId);
         StringBuilder subject = new StringBuilder("");

@@ -31,4 +31,9 @@
         select count(1)
         from investor
     </select>
+
+    <delete id="deleteByInvestorId" parameterType="java.lang.Integer">
+        delete from investor
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>

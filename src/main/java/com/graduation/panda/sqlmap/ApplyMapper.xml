@@ -32,4 +32,9 @@
         select count(1)
         from apply
     </select>
+
+    <delete id="deleteByApplyId" parameterType="java.lang.Integer">
+        delete from apply
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>

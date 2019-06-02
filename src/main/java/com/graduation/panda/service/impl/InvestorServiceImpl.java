@@ -27,4 +27,9 @@ public class InvestorServiceImpl implements InvestorService {
     public int selectCount() {
         return investorMapper.selectCount();
     }
+
+    @Override
+    public void deleteByInvestorId(int id) {
+        investorMapper.deleteByInvestorId(id);
+    }
 }

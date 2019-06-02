@@ -10,4 +10,5 @@ public interface InvestorMapper {
     void insertInvestor(Investor investor);
     List<Investor> findInvestorLimit(int pageNum);
     int selectCount();
+    void deleteByInvestorId(int id);
 }

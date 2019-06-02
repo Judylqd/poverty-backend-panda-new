@@ -28,4 +28,9 @@ public class ApplyServiceImpl implements ApplyService {
     public int selectCount() {
         return applyMapper.selectCount();
     }
+
+    @Override
+    public void deleteByApplyId(int id) {
+        applyMapper.deleteByApplyId(id);
+    }
 }
